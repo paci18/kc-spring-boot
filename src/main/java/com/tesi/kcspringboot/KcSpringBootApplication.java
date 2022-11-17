@@ -1,4 +1,4 @@
-package com.tesi.kcspringboot.controller;
+package com.tesi.kcspringboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,5 +9,6 @@ public class KcSpringBootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KcSpringBootApplication.class, args);
 	}
+
 
 }
