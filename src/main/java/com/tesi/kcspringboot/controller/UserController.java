@@ -1,6 +1,7 @@
 package com.tesi.kcspringboot.controller;
 
 import com.tesi.kcspringboot.model.UserDTO;
+import org.apache.commons.codec.binary.StringUtils;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
@@ -43,7 +44,7 @@ public class UserController {
     }
 
 
-    @PreAuthorize("administrator")
+
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     // this method can be accessed by user whose  role is admin
     public ResponseEntity<?> getUsers(HttpServletRequest request) {
@@ -63,7 +64,8 @@ public class UserController {
         // UserRepresentation userRepresentation = new  UserRepresentation();
         List<UserDTO> listUser = new ArrayList<>();
         String match = "[administrator]";
-        if (role.equals(match)) {
+        //to manage the string also null
+       if ((StringUtils.equals(role, match))) {
 
 
             UserDTO user1 = new UserDTO("Simone", "Pacileo", "simone.pacileo@piksel.com", "", "");
@@ -74,10 +76,13 @@ public class UserController {
             listUser.add(user3);
 
             return new ResponseEntity<>(listUser, HttpStatus.OK);
-        }
+       }
 
-        System.out.println(role);
-        return new ResponseEntity<>("Sei un end-user", HttpStatus.OK);
+       // System.out.println(role);
+        return new ResponseEntity<>("Ciao utente: \n " +
+                " username: " + username + "\n" +
+                " email:  " + emalId + "\n" +
+                " role:  " +  role + "\n", HttpStatus.OK);
 
     }
 
