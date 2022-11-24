@@ -25,32 +25,42 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
-				<dependency>
-					<groupId>org.keycloak</groupId>
-					<artifactId>keycloak-spring-boot-starter</artifactId>
-					<version>8.0.1</version>
-				</dependency>
-				<dependency>
-					<groupId>org.keycloak</groupId>
-					<artifactId>keycloak-admin-client</artifactId>
-					<version>19.0.3</version>
-				</dependency>
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-spring-boot-starter</artifactId>
+			<version>19.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-admin-client</artifactId>
+			<version>19.0.3</version>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.7.4</version>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>5.7.4</version>
+		</dependency>
 	</dependencies>
-		<dependencyManagement>
-			<dependencies>
-				<dependency>
-					<groupId>org.keycloak.bom</groupId>
-					<artifactId>keycloak-adapter-bom</artifactId>
-					<version>20.0.1</version>
-					<type>pom</type>
-					<scope>import</scope>
-				</dependency>
-			</dependencies>
-		</dependencyManagement>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.keycloak.bom</groupId>
+				<artifactId>keycloak-adapter-bom</artifactId>
+				<version>20.0.1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
@@ -59,4 +69,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
