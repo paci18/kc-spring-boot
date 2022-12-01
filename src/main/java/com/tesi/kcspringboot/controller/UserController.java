@@ -1,7 +1,5 @@
 package com.tesi.kcspringboot.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.tesi.kcspringboot.DTO.UserDTO;
 import com.tesi.kcspringboot.service.KcService;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
@@ -12,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,17 +20,12 @@ import java.util.List;
 public class UserController {
     @Autowired
     private final KcService kcService;
+
     public UserController(KcService kcService) {
         this.kcService = kcService;
 
     }
 
-    //TODO da rimuovere
-
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public ResponseEntity<?> test() {
-        return new ResponseEntity<>("Hi!", HttpStatus.OK);
-    }
 
     @PreAuthorize("hasRole('administrator')")
     @GetMapping(value = "/getUsers")
@@ -42,14 +34,12 @@ public class UserController {
 
         KeycloakAuthenticationToken AuthenticationToken = (KeycloakAuthenticationToken) request.getUserPrincipal();
         KeycloakPrincipal principal = (KeycloakPrincipal) AuthenticationToken.getPrincipal();
-      //  AccessToken Accesstoken = principal.getKeycloakSecurityContext().getToken();
         String realmRepresentation = principal.getKeycloakSecurityContext().getRealm();
 
         List<UserRepresentation> listUsers = kcService.getUsersFromToken(realmRepresentation);
 
 
-        //  return new ResponseEntity<>(kcService.listaStringheUsers(listUsers), HttpStatus.OK);
-         //return new ResponseEntity<>(listUsers, HttpStatus.OK);
+        //return new ResponseEntity<>(listUsers, HttpStatus.OK);
 
         return new ResponseEntity<>(kcService.ConvertUserReprToUSerDTO(listUsers), HttpStatus.OK);
 
