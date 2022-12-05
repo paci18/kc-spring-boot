@@ -44,7 +44,6 @@ public class UserController {
     }
 
 
-
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     // this method can be accessed by user whose  role is admin
     public ResponseEntity<?> getUsers(HttpServletRequest request) {
