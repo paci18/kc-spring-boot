@@ -19,6 +19,9 @@ import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.List;
 
 @KeycloakConfiguration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -49,7 +52,14 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/user/*").hasRole("administrator").anyRequest().permitAll();
 
-        http.csrf().disable();
+      http.exceptionHandling().and().cors().and().csrf().disable();
+        http.cors().configurationSource(request -> {
+            var cors = new CorsConfiguration();
+            cors.setAllowedOrigins(List.of("http://localhost:5000", "http://127.0.0.1:80", "http://example.com"));
+            cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
+            cors.setAllowedHeaders(List.of("*"));
+            return cors;
+        }).and().csrf().disable();
     }
 
     @Bean
